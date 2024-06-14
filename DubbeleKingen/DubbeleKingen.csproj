@@ -88,16 +88,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\MainPage.xaml.cs">
+	  <Compile Update="Pages\CreateGamePages\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\CreateNewPlayerPage.xaml.cs">
+	  <Compile Update="Pages\CreateGamePages\CreateNewPlayerPage.xaml.cs">
 	    <DependentUpon>CreateNewPlayerPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\PlayerCountSelectPage.xaml.cs">
+	  <Compile Update="Pages\CreateGamePages\PlayerCountSelectPage.xaml.cs">
 	    <DependentUpon>PlayerCountSelectPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\SimpleScorePage.xaml.cs">
+	  <Compile Update="Pages\CurrentGamePages\SimpleScorePage.xaml.cs">
 	    <DependentUpon>SimpleScorePage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
@@ -107,40 +107,40 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\ChooseNamePage.xaml">
+	  <MauiXaml Update="Pages\CreateGamePages\ChooseNamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\CreateNewPlayerPage.xaml">
+	  <MauiXaml Update="Pages\CreateGamePages\CreateNewPlayerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\GameLeaderboardPage.xaml">
+	  <MauiXaml Update="Pages\ExistingGamePages\GameLeaderboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\GameRunningPage.xaml">
+	  <MauiXaml Update="Pages\CurrentGamePages\GameRunningPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\PickANegativePage.xaml">
+	  <MauiXaml Update="Pages\CurrentGamePages\PickANegativePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\PickASuitPage.xaml">
+	  <MauiXaml Update="Pages\CurrentGamePages\PickASuitPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\PlayerCountSelectPage.xaml">
+	  <MauiXaml Update="Pages\CreateGamePages\PlayerCountSelectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\PlayerSelectPage.xaml">
+	  <MauiXaml Update="Pages\CreateGamePages\PlayerSelectPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\PositiveNegativePage.xaml">
+	  <MauiXaml Update="Pages\CurrentGamePages\PositiveNegativePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ScoreLeaderboardPage.xaml">
+	  <MauiXaml Update="Pages\ExistingGamePages\ScoreLeaderboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\ScoreLoadGamePage.xaml">
+	  <MauiXaml Update="Pages\ExistingGamePages\ScoreLoadGamePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\SimpleScorePage.xaml">
+	  <MauiXaml Update="Pages\CurrentGamePages\SimpleScorePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

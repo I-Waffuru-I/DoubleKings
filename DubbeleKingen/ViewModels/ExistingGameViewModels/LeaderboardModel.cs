@@ -11,27 +11,24 @@ using DubbeleKingen.Services;
 using CommunityToolkit.Mvvm.Input;
 using DubbeleKingen.Pages;
 using Microsoft.Maui.Networking;
-using DubbeleKingen.Managers;
 
 namespace DubbeleKingen.ViewModels
 {
-    public partial class LoadGameModel : BaseViewModel
+    public partial class LeaderboardModel : BaseViewModel
     {
 
 
-        GameService _service;
-        public LoadGameModel(NavigationManager nav, KingGameManager game , GameService service) : base(nav)
+        FirebaseGameService _service;
+        public LeaderboardModel(NavigationManager nav, FirebaseGameService service, IConnectivity connectivity) : base(nav)
         {
-            Title = "LOAD GAME";
+            Title = "LEADERBOARD";
             this._service = service;
-            gameManager = game;
+            this._connectivity = connectivity;
 
             GameHasBeenSelected = false;
         }
 
         #region PROPERTIES
-        KingGameManager gameManager;
-
         [ObservableProperty]
         int gameCount;
         [ObservableProperty]
@@ -43,6 +40,7 @@ namespace DubbeleKingen.ViewModels
         public ObservableCollection<Game> AvailableGames { get; } = new();
         public ObservableCollection<LeaderboardPlayerScore> PlayerScores { get; } = new();
 
+        IConnectivity _connectivity;
         #endregion
 
         #region COMMANDS
@@ -50,7 +48,13 @@ namespace DubbeleKingen.ViewModels
         #region INIT
         [RelayCommand]
         async Task GetAvailableGames()
-        {  
+        {
+            if (_connectivity.NetworkAccess != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("No connectivity!", $"Please check internet and try again.", "OK");
+                return;
+            }
+
             try
             {
                 var root = await _service.GetAllGames();
@@ -71,15 +75,22 @@ namespace DubbeleKingen.ViewModels
         #endregion INIT
 
         #region EVENTS
-
         [RelayCommand]
         private async void ClickOnGame(Game game)
         {
             if (game == null) return;
 
-            gameManager.ContinueGameFromLoad(game);
+            CurrentSelectedGame = game;
+            for (int i = 0; i < game.PlayerCount; i++)
+            {
+                Player player = game.Players[i];
+                PlayerScores.Add(new(game.Players[i].Name, game.Plus[player.Name], game.Min[player.Name]));
+            }
 
-            await GoToPage(nameof(ScoreLoadGamePage));
+            await GoToPage(nameof(ScoreLeaderboardPage), new Dictionary<string, object>
+            {
+                {"selectedGame", PlayerScores}
+            });
         }
 
         #endregion EVENTS

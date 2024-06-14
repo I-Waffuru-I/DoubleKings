@@ -15,9 +15,9 @@ namespace DubbeleKingen.ViewModels
         [ObservableProperty]
         string inputText = "New Player";
 
-        PlayerService _service;
+        FirebasePlayerService _service;
         
-        public CreateNewPlayerModel(NavigationManager nav, PlayerService serv) : base(nav)
+        public CreateNewPlayerModel(NavigationManager nav, FirebasePlayerService serv) : base(nav)
         {
             this._service = serv;
         }

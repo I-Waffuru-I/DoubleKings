@@ -52,8 +52,8 @@ namespace DubbeleKingen
             builder.Services.AddSingleton<GameLeaderboardModel>();
 
             // SERVICES
-            builder.Services.AddSingleton<PlayerService>();
-            builder.Services.AddSingleton<GameService>();
+            builder.Services.AddSingleton<IPlayerService,FirebasePlayerService>();
+            builder.Services.AddSingleton<IGameService,FirebaseGameService>();
 
             // OTHER
             builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);

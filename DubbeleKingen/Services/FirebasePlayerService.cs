@@ -13,7 +13,7 @@ using DubbeleKingen.Models.Receptibles;
 
 namespace DubbeleKingen.Services
 {
-    public class PlayerService
+    public class FirebasePlayerService : IPlayerService
     {
         string baseUrl = "https://dubbelkingen-default-rtdb.europe-west1.firebasedatabase.app/";
         string goodlink = "https://dubbelkingen-default-rtdb.europe-west1.firebasedatabase.app/testplayers.json";
@@ -22,9 +22,10 @@ namespace DubbeleKingen.Services
         HttpClient client;
 
 
-        public PlayerService()
+        public FirebasePlayerService()
         {
             client = new();
+
 
             string path = "testplayers";
             query = new FirebaseClient(baseUrl).Child(path);

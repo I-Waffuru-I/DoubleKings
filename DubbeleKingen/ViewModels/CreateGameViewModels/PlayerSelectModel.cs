@@ -15,13 +15,11 @@ using Microsoft.Maui.Networking;
 namespace DubbeleKingen.ViewModels
 {
     [QueryProperty(nameof(PlayerCount), "playerCount")]
-
     public partial class PlayerSelectModel : BaseViewModel
     {
         
 
-        PlayerService _service;
-        public PlayerSelectModel(NavigationManager nav, PlayerService service, IConnectivity connectivity) : base(nav)
+        public PlayerSelectModel(NavigationManager nav, IPlayerService service, IConnectivity connectivity) : base(nav)
         {
             Title = "SELECT PLAYERS";
             this._service= service;
@@ -38,9 +36,11 @@ namespace DubbeleKingen.ViewModels
         [ObservableProperty]
         Player? currentSelectedPlayer;
 
+        
         public ObservableCollection<Player> SelectedPlayers { get; } = new();
         public ObservableCollection<Player> AvailablePlayers { get; } = new();
 
+        IPlayerService _service;
         IConnectivity _connectivity;
         #endregion
 

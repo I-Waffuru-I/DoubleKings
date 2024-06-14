@@ -13,7 +13,7 @@ namespace DubbeleKingen.Managers
 {
     public partial class KingGameManager : ObservableObject
     { 
-        public KingGameManager(GameService serv) 
+        public KingGameManager(IGameService serv) 
         {
             service = serv;
         }
@@ -38,7 +38,7 @@ namespace DubbeleKingen.Managers
         int pickedGameType;
         bool isPositive;
 
-        GameService service;
+        IGameService service;
 
         [ObservableProperty]
         Game currentGame = null!;

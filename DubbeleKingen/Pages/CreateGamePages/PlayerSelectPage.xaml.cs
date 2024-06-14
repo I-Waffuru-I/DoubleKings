@@ -10,9 +10,4 @@ public partial class PlayerSelectPage : ContentPage
 		BindingContext = viewModel;
 		//test(viewModel);
 	}
-
-	private async void test(PlayerSelectModel viewModel)
-	{
-		await Shell.Current.DisplayAlert("k", viewModel.ToString(), "ok");
-    }
 }

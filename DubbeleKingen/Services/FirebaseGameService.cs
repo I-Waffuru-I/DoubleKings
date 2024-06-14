@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DubbeleKingen.Services
 {
-    public class GameService
+    public class FirebaseGameService : IGameService
     {
         #region PROPERTIES
 
@@ -23,7 +23,7 @@ namespace DubbeleKingen.Services
 
         #endregion
 
-        public GameService() 
+        public FirebaseGameService() 
         {
             client = new();
 
