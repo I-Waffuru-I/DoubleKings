@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.PickASuitPage"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"  
+             xmlns:model="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="model:PickASuitModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Style="{StaticResource BaseContentPageStyle}"
+             NavigationPage.HasBackButton="False">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding UpdateTitleCommand}"/>
+    </ContentPage.Behaviors>
+    
+    
+    <Grid RowDefinitions="10*,7*,*,7*,3*,4*,*"
+          ColumnDefinitions="*,*"
+          Style="{StaticResource BaseGridStyle}">
+
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="2"
+               Text="{Binding Title}"
+               Style="{StaticResource HeadLabelStyle}"
+/>
+        <Button Grid.Row="1"
+                Grid.Column="0"
+                Text="♡"
+                Style="{StaticResource SuitButtonStyle}"
+                Command="{Binding GoToRunningGameCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>0</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                Text="♤"
+                Command="{Binding GoToRunningGameCommand}"
+                Style="{StaticResource SuitButtonStyle}">
+            <Button.CommandParameter>
+                <sys:Int32>3</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+
+        <Button Grid.Row="3"
+                Grid.Column="0"
+                Text="♧"
+                Command="{Binding GoToRunningGameCommand}"
+                Style="{StaticResource SuitButtonStyle}">
+            <Button.CommandParameter>
+                <sys:Int32>1</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+        <Button Grid.Row="3"
+                Grid.Column="1"
+                Text="◇"
+                Style="{StaticResource SuitButtonStyle}"
+                Command="{Binding GoToRunningGameCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>2</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+
+        <Button Grid.Row="5"
+                Grid.ColumnSpan="2"
+                Text="Back"
+                Style="{StaticResource ReturnLargeButtonStyle}"
+                Command="{Binding GoBackCommand}" 
+                />
+    </Grid>
+</ContentPage>

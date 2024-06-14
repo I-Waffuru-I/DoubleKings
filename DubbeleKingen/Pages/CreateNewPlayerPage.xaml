@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.CreateNewPlayerPage"
+             xmlns:view="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="view:CreateNewPlayerModel"             
+             Style="{StaticResource BaseContentPageStyle}">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior  IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+
+    <Grid Style="{StaticResource BaseGridStyle}"
+          RowDefinitions="10*,3*,15*,4*,*"
+          ColumnDefinitions="*,*">
+        <Label 
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Text="Create Player"
+            Style="{StaticResource HeadLabelStyle}"
+            />
+
+        <Entry Grid.Row="1"
+                Grid.ColumnSpan="2"
+               ClearButtonVisibility="WhileEditing"
+               HorizontalTextAlignment="Center"
+               Style="{StaticResource LargeEntryStyle}"
+               Text="{Binding InputText}">
+            
+        </Entry>
+
+        <Button Text="Back"
+                Grid.Row="3"
+                Grid.Column="0"
+            Command="{Binding GoBackPageCommand}"
+            Style="{StaticResource ReturnLargeButtonStyle}"/>
+        
+        <Button Text="Create"
+                Grid.Row="3"
+                Grid.Column="1"
+                Command="{Binding CreatePlayerAndLeaveCommand}"
+                Style="{StaticResource LargeButtonStyle}"/>
+    </Grid>
+</ContentPage>

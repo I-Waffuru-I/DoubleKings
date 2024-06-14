@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.MainPage"
+             xmlns:view="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="view:MainMenuModel"
+             Style="{StaticResource BaseContentPageStyle}"
+             >
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior  IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+
+    <Grid RowDefinitions="18*,4*,*,4*,*,4*,*"
+          ColumnDefinitions="0.5*,5*,0.5*"
+          Style="{StaticResource BaseGridStyle}">
+
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="{Binding Title}"
+            Style="{StaticResource HeadLabelStyle}"/>
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="NEW GAME"
+            Command="{Binding OpenNewGamePageCommand}"
+            Style="{StaticResource LargeButtonStyle}"
+            />
+
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="LOAD GAME"
+            Command="{Binding OpenLoadGamePageCommand}"
+            Style="{StaticResource LargeButtonStyle}"
+            />
+
+        <Button
+            Grid.Row="5"
+            Grid.Column="1"
+            Text="LEADERBOARDS"
+            Command="{Binding OpenLeaderboardPageCommand}"
+            Style="{StaticResource LargeButtonStyle}"
+            />
+    </Grid>
+</ContentPage>

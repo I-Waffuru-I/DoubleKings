@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.LeaderboardPage"
+             xmlns:view="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="view:LeaderboardModel"
+             xmlns:model="clr-namespace:DubbeleKingen.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Style="{StaticResource BaseContentPageStyle}"
+             NavigationPage.HasBackButton="False">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior  IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding GetAvailableGamesCommand}" />
+    </ContentPage.Behaviors>
+    <Grid RowDefinitions="10*,17*,*,4*,*"
+      ColumnDefinitions="*,10*,*"
+      Style="{StaticResource BaseGridStyle}">
+
+        <Label
+        Grid.Row="0"
+        Grid.Column="1"
+        Text="{Binding Title}"
+        Style="{StaticResource HeadLabelStyle}"
+        VerticalOptions="Center"
+        HorizontalOptions="Center"/>
+
+        <RefreshView 
+        Grid.Column="1"
+         Grid.Row="1"
+         Command="{Binding GetAvailableGamesCommand}">
+            <Border Stroke="{StaticResource DefaultDarkColour}"
+                StrokeShape="RoundRectangle 10,10,10,10"
+                Padding="20"
+                BackgroundColor="{StaticResource DefaultColour}">
+                <CollectionView 
+            ItemsSource="{Binding AvailableGames}"
+            SelectionMode="None"
+            Style="{StaticResource BaseCollectionViewStyle}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="1"/>
+                    </CollectionView.ItemsLayout>
+
+                    <!-- Collection Item Template -->
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Player">
+
+                            <Label Text="{Binding Name}" Style="{StaticResource ListLabelStyle}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                CommandParameter="{Binding .}"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type view:LeaderboardModel}}, Path=ClickOnGameCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="100">
+                            <Label Text="Currently no leaderboard to show!"/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </Border>
+        </RefreshView>
+
+
+        <Button
+        Grid.Row="3"
+        Grid.Column="1"
+        Text="RETURN TO MENU"
+        Command="{Binding GoBackToMainPageCommand}"
+        Style="{StaticResource ReturnLargeButtonStyle}"
+        HorizontalOptions="Fill" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"  
+             x:Class="DubbeleKingen.Pages.PlayerCountSelectPage"
+             xmlns:view="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="view:PlayerCountSelectModel"
+             Style="{StaticResource BaseContentPageStyle}"
+             NavigationPage.HasBackButton="False">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior  IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <Grid Style="{StaticResource BaseGridStyle}"
+          RowDefinitions="18*,4*,*,4*,*,4*,*"
+          ColumnDefinitions="0.5*,5*,0.5*">
+        <Label 
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="{Binding Title}"
+            VerticalOptions="Center" 
+            Style="{StaticResource HeadLabelStyle}"
+            HorizontalOptions="Center" />
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="4 Players"
+            Style="{StaticResource LargeButtonStyle}"
+            Command="{Binding OpenPlayerSelectPageCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>4</sys:Int32>
+            </Button.CommandParameter>
+
+        </Button>
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="3 Players"
+            Style="{StaticResource LargeButtonStyle}"
+            Command="{Binding OpenPlayerSelectPageCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>3</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+
+        <Button Grid.Row="5"
+            Grid.Column="1"
+                 Text="Return to menu"
+                Style="{StaticResource ReturnLargeButtonStyle}"
+                Command="{Binding GoToMenuCommand}"/>
+        
+    </Grid> 
+</ContentPage>

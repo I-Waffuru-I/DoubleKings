@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.PositiveNegativePage"
+             xmlns:view="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="view:PositiveNegativeModel"          
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Style="{StaticResource BaseContentPageStyle}"
+             >
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior  IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding UpdateTitleCommand}"/>
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="13*,*,6*,*,6*,*,4*,*"
+          Style="{StaticResource BaseGridStyle}"> 
+        <Label 
+            Grid.Row="0"
+            Text="{Binding Title}"
+            Style="{StaticResource HeadLabelStyle}"/>
+
+        <Button Grid.Row="2"
+                Text="POSITIVES"
+                Style="{StaticResource LargeButtonStyle}"
+                Command="{Binding GoToPlusCommand}"/>
+
+        <Button Grid.Row="4"
+                Text="NEGATIVES"
+                Style="{StaticResource LargeButtonStyle}"
+                Command="{Binding GoToMinCommand}"/>
+
+        <Button Grid.Row="6"
+                Text="Return to menu"
+                Style="{StaticResource ReturnLargeButtonStyle}"
+                Command="{Binding GoToMenuCommand}"/>
+
+    </Grid>
+</ContentPage>

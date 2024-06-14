@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.PlayerSelectPage"
+             xmlns:view="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="view:PlayerSelectModel"
+             xmlns:model="clr-namespace:DubbeleKingen.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Style="{StaticResource BaseContentPageStyle}"
+             NavigationPage.HasBackButton="False">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior  IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding GetAvailablePlayersCommand}" />
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding ShowSelectedPlayersButtonsCommand}"/>
+    </ContentPage.Behaviors>
+
+
+    <Grid ColumnDefinitions="*,*"
+          RowDefinitions="10*,14*,4*,4*,*"
+          Style="{StaticResource BaseGridStyle}">
+
+        <Label
+            Grid.ColumnSpan="2"
+            Grid.Row="0"
+            Text="{Binding Title}"
+            Style="{StaticResource HeadLabelStyle}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        
+        <!-- AVAILABLE PLAYER LIST -->
+        <RefreshView Grid.Column="0"
+                     Grid.Row="1"
+                     Command="{Binding GetAvailablePlayersCommand}">
+            <Border Stroke="{StaticResource DefaultDarkColour}"
+                    StrokeShape="RoundRectangle 0,50,0,50"
+                    Padding="20"
+                    BackgroundColor="{StaticResource DefaultColour}">
+                <CollectionView 
+                ItemsSource="{Binding AvailablePlayers}"
+                SelectionMode="None"
+                Style="{StaticResource BaseCollectionViewStyle}">
+                    <!-- Collection Layout -->
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="1"/>
+                    </CollectionView.ItemsLayout>
+
+                    <!-- Collection Item Template -->
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Player">
+
+                            <Label Text="{Binding Name}" Style="{StaticResource ListLabelStyle}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                    CommandParameter="{Binding .}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type view:PlayerSelectModel}}, Path=ClickOnPlayerFromListCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                    <!-- Empty -->
+                    <CollectionView.EmptyView>
+                        <StackLayout Padding="100">
+                            <Label Text="Something has gone wrong..."/>
+                        </StackLayout>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </Border>
+        </RefreshView>
+
+
+        <!-- PLAYER SELECT LIST  -->
+        <RefreshView Grid.Column="1"
+                     Grid.Row="1"
+                     IsEnabled="{Binding PlayerHasBeenSelected}"
+                     Command="{Binding ShowSelectedPlayersButtonsCommand}">
+            <CollectionView 
+                            Style="{StaticResource LightCollectionViewStyle}"
+                            IsEnabled="{Binding PlayerHasBeenSelected}"
+                            ItemsSource="{Binding SelectedPlayers}" 
+                            SelectionMode="None">
+                <!-- Collection Layout -->
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1"/>
+                </CollectionView.ItemsLayout>
+
+                <!-- Collection Item Template -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Player">
+
+                        <Frame Style="{StaticResource PlayerSelectItemFrame}">
+                            <Label Text="{Binding Name}" Style="{StaticResource PlayerSelectedLabel}"/>
+                            <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        CommandParameter="{Binding .}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type view:PlayerSelectModel}}, Path=AddPlayerToSelectionCommand}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <!-- Empty -->
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="100">
+                        <Label Text="Something has gone wrong..."/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+
+
+            </CollectionView>
+
+        </RefreshView>
+
+        <Button     Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Text="Add"
+                    Command="{Binding CreateNewPlayerCommand}"
+                    Style="{StaticResource LargeButtonStyle}"/>
+
+        <Button Grid.Row="3"
+                Grid.Column="0"
+                Text="Back"
+                Command="{Binding GoBackPageCommand}"
+                Style="{StaticResource ReturnLargeButtonStyle}"
+            />
+        <Button Grid.Row="3"
+                Grid.Column="1"
+                Text="Next"
+                Command="{Binding GoToChooseNameCommand}"
+                Style="{StaticResource LargeButtonStyle}"
+            />
+    </Grid>
+</ContentPage>

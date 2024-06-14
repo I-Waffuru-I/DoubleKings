@@ -1,0 +1,149 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DubbeleKingen"
+             x:Class="DubbeleKingen.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!--#region USED VALUES -->
+            <Color x:Key="DefaultBrightColour">#F3F2EE</Color>
+            <Color x:Key="DefaultDarkColour">#463F3A</Color>
+            <Color x:Key="DefaultColour">#8B817B</Color>
+
+            <!--#endregion-->
+
+
+            <!--#region BASE STYLES -->
+            <Style TargetType="ContentPage" x:Key="BaseContentPageStyle">
+                <Setter Property="Background" Value="{StaticResource DefaultBrightColour}"/>
+            </Style>
+            <Style TargetType="Button" x:Key="BaseButtonStyle">
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultColour}"/>
+                <Setter Property="TextColor" Value="{StaticResource DefaultDarkColour}"/>
+                <Setter Property="BorderWidth" Value="2"/>
+                <Setter Property="BorderColor" Value="{StaticResource DefaultDarkColour}"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="FontSize" Value="10"/>
+            </Style>
+            <Style TargetType="Label" x:Key="BaseLabelStyle">
+                <Setter Property="TextColor" Value="{StaticResource DefaultDarkColour}"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="Entry" x:Key="BaseEntryStyle">
+                <Setter Property="TextColor" Value="{StaticResource DefaultDarkColour}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultColour}"/>
+            </Style>
+            <Style TargetType="Grid" x:Key="BaseGridStyle">
+                <Setter Property="Background" Value="{StaticResource DefaultBrightColour}"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+            <Style TargetType="VerticalStackLayout" x:Key="BaseVerticalStackStyle">
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            </Style>
+            <Style TargetType="HorizontalStackLayout" x:Key="BaseHorizontalStackStyle">
+                <Setter Property="Spacing" Value="15" />
+            </Style>
+            <Style TargetType="CollectionView" x:Key="BaseCollectionViewStyle">
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultColour}"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style TargetType="Picker" x:Key="BasePickerStyle">
+                <Setter Property="TextColor" Value="{StaticResource DefaultDarkColour}"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style TargetType="Frame" x:Key="BaseFrameStyle">
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultColour}"/>
+                <Setter Property="CornerRadius" Value="25"/>
+            </Style>
+
+            <!--#endregion-->
+
+            
+            <!--#region TARGETED STYLES  -->
+            <Style TargetType="Label" x:Key="HeadLabelStyle" BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontSize" Value="50"/>
+            </Style>
+            <Style TargetType="Label" x:Key="LargeLabelStyle" BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="Label" x:Key="ListLabelStyle" BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="FontSize" Value="20"/>
+            </Style>
+            <Style TargetType="Label" x:Key="ScoreSelectLabel" BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="Padding" Value="20"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultDarkColour}"/>
+                <Setter Property="TextColor" Value="{StaticResource DefaultBrightColour}"/>
+            </Style>
+            <Style TargetType="Label" x:Key="PlayerSelectedLabel" BasedOn="{StaticResource BaseLabelStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultColour}"/>
+                <Setter Property="TextColor" Value="{StaticResource DefaultDarkColour}"/>
+            </Style>
+           
+
+
+            <Style TargetType="Button" x:Key="LargeButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="Button" x:Key="MiddleButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="FontSize" Value="10"/>
+            </Style>
+            <Style TargetType="Button" x:Key="ReturnButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultDarkColour}"/>
+                <Setter Property="TextColor" Value="{StaticResource DefaultColour}"/>
+            </Style>
+            <Style TargetType="Button" x:Key="ReturnLargeButtonStyle" BasedOn="{StaticResource ReturnButtonStyle}">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="Button" x:Key="SuitButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
+                <Setter Property="FontSize" Value="50"/>
+            </Style>
+
+
+
+
+            <Style TargetType="Entry" x:Key="LargeEntryStyle" BasedOn="{StaticResource BaseEntryStyle}">
+                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="Background" Value="{StaticResource DefaultBrightColour}"/>
+            </Style>
+
+
+            <Style TargetType="HorizontalStackLayout" x:Key="DarkHorizontalStack" BasedOn="{StaticResource BaseHorizontalStackStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultColour}"/>
+            </Style>
+
+
+            <Style TargetType="CollectionView" x:Key="LightCollectionViewStyle" BasedOn="{StaticResource BaseCollectionViewStyle}">
+                <Setter Property="BackgroundColor" Value="{StaticResource DefaultBrightColour}"/>
+            </Style>
+
+            
+            <Style TargetType="Frame" x:Key="PlayerSelectItemFrame" BasedOn="{StaticResource BaseFrameStyle}">
+                <Setter Property="Background" Value="{StaticResource DefaultColour}"/>
+            </Style>
+            <Style TargetType="Frame" x:Key="ScoreSelectItemFrame" BasedOn="{StaticResource BaseFrameStyle}">
+                <Setter Property="Background" Value="{StaticResource DefaultDarkColour}"/>
+            </Style>
+
+
+            <Style TargetType="Picker" x:Key="LargePicker" BasedOn="{StaticResource BasePickerStyle}">
+                <Setter Property="FontSize" Value="40"/>
+            </Style>
+            <!--#endregion-->
+            
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

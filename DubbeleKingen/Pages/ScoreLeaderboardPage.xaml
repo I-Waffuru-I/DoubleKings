@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.ScoreLeaderboardPage"
+             xmlns:view="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="view:ScoreLeaderboardModel"
+             xmlns:model="clr-namespace:DubbeleKingen.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Style="{StaticResource BaseContentPageStyle}"
+             NavigationPage.HasBackButton="False">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior  IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+    
+    
+
+    <Grid RowDefinitions="10*,17*,*,4*,*"
+  ColumnDefinitions="*,10*,*"
+  Style="{StaticResource BaseGridStyle}">
+
+        <Label
+    Grid.Row="0"
+    Grid.Column="1"
+    Text="{Binding Title}"
+    Style="{StaticResource HeadLabelStyle}"
+    VerticalOptions="Center"
+    HorizontalOptions="Center"/>
+
+        <CollectionView
+                ItemsSource="{Binding PlayerScores}"
+                Style="{StaticResource BaseCollectionViewStyle}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="1"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyView>
+                <Label Text="oi, something went wrong." Style="{StaticResource HeadLabelStyle}"/>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:LeaderboardPlayerScore">
+                    <Grid ColumnDefinitions="3*,*,*,*">
+
+
+                        <Button
+                                Grid.Column="0"
+                                Text="{Binding Name}"
+                                Style="{StaticResource ReturnLargeButtonStyle}"
+                                HorizontalOptions="Fill" />
+
+                        <Button
+                                Grid.Column="0"
+                                Text="{Binding Plus}"
+                                Style="{StaticResource ReturnLargeButtonStyle}"
+                                HorizontalOptions="Fill" />
+
+
+                        <Button
+                                Grid.Column="0"
+                                Text="{Binding Min}"
+                                Style="{StaticResource ReturnLargeButtonStyle}"
+                                HorizontalOptions="Fill" />
+
+
+                        <Button
+                                Grid.Column="0"
+                                Text="{Binding Total}"
+                                Style="{StaticResource ReturnLargeButtonStyle}"
+                                HorizontalOptions="Fill" />
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+        <Button
+    Grid.Row="3"
+    Grid.Column="1"
+    Text="RETURN TO MENU"
+    Command="{Binding GoBackToMainPageCommand}"
+    Style="{StaticResource ReturnLargeButtonStyle}"
+    HorizontalOptions="Fill" />
+    </Grid>
+</ContentPage>

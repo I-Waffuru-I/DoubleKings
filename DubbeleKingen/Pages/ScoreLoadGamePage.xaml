@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.ScoreLoadGamePage"
+             xmlns:view="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="view:ScoreLoadGameModel"
+             xmlns:model="clr-namespace:DubbeleKingen.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Style="{StaticResource BaseContentPageStyle}"
+             NavigationPage.HasBackButton="False">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior  IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding GetLeaderboardInfoCommand}" />
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="10*,12*,*,4*,*,4*,*"
+   
+  Style="{StaticResource BaseGridStyle}">
+
+        <Label
+            Grid.Row="0"
+            Text="{Binding Title}"
+            Style="{StaticResource HeadLabelStyle}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+
+
+        <CollectionView
+            Grid.Row="1"
+                ItemsSource="{Binding PlayerScores}"
+                Style="{StaticResource BaseCollectionViewStyle}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="1"/>
+            </CollectionView.ItemsLayout>
+
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:LeaderboardPlayerScore">
+                    <Grid ColumnDefinitions="3*,*,*,*">
+
+                        <Label  
+                                Grid.Column="0"
+                                Text="{Binding Name}" 
+                                Style="{StaticResource ScoreSelectLabel}"/>
+
+
+                        <Label  
+                                Grid.Column="1"
+                                Text="{Binding Plus}" 
+                                Style="{StaticResource ScoreSelectLabel}"/>
+
+                        <Label
+                                Grid.Column="2"
+                                Text="{Binding Min}" 
+                                Style="{StaticResource ScoreSelectLabel}"/>
+
+                        <Label 
+                                Grid.Column="3"
+                                Text="{Binding Total}" 
+                                Style="{StaticResource ScoreSelectLabel}"/>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <Label Text="Something went wrong" Style="{StaticResource HeadLabelStyle}"/>
+            </CollectionView.EmptyView>
+        </CollectionView>
+
+        <Button
+    Grid.Row="3"
+    Text="CONTINUE GAME"
+    Command="{Binding GoBackPageCommand}"
+    Style="{StaticResource LargeButtonStyle}"
+    HorizontalOptions="Fill" />
+
+        <Button
+    Grid.Row="5"
+    Text="RETURN TO MENU"
+    Command="{Binding GoBackToMainPageCommand}"
+    Style="{StaticResource ReturnLargeButtonStyle}"
+    HorizontalOptions="Fill" />
+    </Grid>
+</ContentPage>

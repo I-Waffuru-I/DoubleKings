@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+            x:Name="ParentPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.SimpleScorePage"
+             xmlns:view="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="view:ScoreModel"
+             xmlns:model="clr-namespace:DubbeleKingen.Models.Receptibles"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Style="{StaticResource BaseContentPageStyle}"
+             >
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior  IsEnabled="False" IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding SetupScorePageCommand}"/>
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="6*,21*,*,4*,*"
+          ColumnDefinitions="*,*"
+          Style="{StaticResource BaseGridStyle}">
+        <Grid Grid.Row="0"
+              Grid.ColumnSpan="2"
+              RowDefinitions="2*,*">
+
+            <Label 
+                Grid.Row="0"
+                Text="{Binding Title}"
+                Style="{StaticResource HeadLabelStyle}"
+            />
+            <Label Grid.Row="1"
+                   Text="{Binding ScoreCheck}"
+                   Style="{StaticResource BaseLabelStyle}"
+            />
+        </Grid>
+
+
+        <RefreshView
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Command="{Binding SetupScorePageCommand}">
+
+            <CollectionView
+                ItemsSource="{Binding PlayerScores}"
+                Style="{StaticResource BaseCollectionViewStyle}">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.EmptyView>
+                    <Label Text="oi, something went wrong here." Style="{StaticResource HeadLabelStyle}"/>
+                </CollectionView.EmptyView>
+
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:PlayerScore">
+                        <Grid ColumnDefinitions="4*,*,*">
+                            <Frame Style="{StaticResource ScoreSelectItemFrame}">
+                                <Label Text="{Binding Name}" Grid.Column="0"
+                                    Style="{StaticResource ScoreSelectLabel}"/>
+                            </Frame>
+
+
+                            <Picker        
+                                Grid.Column="1"
+                                Style="{StaticResource LargePicker}"
+                                SelectedItem="{Binding Score}"
+                                ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type view:ScoreModel}}, Path=ScoresList}"
+                             >
+                                <Picker.Behaviors>
+                                    <toolkit:EventToCommandBehavior 
+                                    EventName="SelectedIndexChanged" 
+                                    Command="{Binding Source={x:Reference ParentPage}, Path=BindingContext.SimplePickerItemChangedCommand}"
+                                />
+                                </Picker.Behaviors>
+                            </Picker>
+
+                        </Grid>
+
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+
+
+        <Button 
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Style="{StaticResource LargeButtonStyle}"
+            Text="Next"
+            IsEnabled="{Binding CorrectScoreCountIsAchievedInv}"
+            Command="{Binding GoToNextRoundCommand}"
+        />
+
+    </Grid>
+</ContentPage>

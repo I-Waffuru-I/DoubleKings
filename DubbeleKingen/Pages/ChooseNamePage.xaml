@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.ChooseNamePage"
+             xmlns:model="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="model:ChooseNameModel"
+             NavigationPage.HasBackButton="False"
+             Style="{StaticResource BaseContentPageStyle}">
+    <Grid RowDefinitions="10*,3*,15*,4*,*"
+          ColumnDefinitions="*,*"
+          Style="{StaticResource BaseGridStyle}">
+        <Label
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Text="{Binding Title}"
+            Style="{StaticResource HeadLabelStyle}"
+            />
+        <Entry Grid.Row="1"
+                Grid.ColumnSpan="2"
+               ClearButtonVisibility="WhileEditing"
+               HorizontalTextAlignment="Center"
+               Style="{StaticResource LargeEntryStyle}"
+               Text="{Binding GameName}">
+
+        </Entry>
+
+        <Button Grid.Row="3"
+                Grid.Column="0"
+                Text="Back"
+                Command="{Binding GoBackPageCommand}"
+                Style="{StaticResource ReturnLargeButtonStyle}"
+            />
+        <Button Grid.Row="3"
+                Grid.Column="1"
+                Text="Next"
+                Command="{Binding GoToNewGameCommand}"
+                Style="{StaticResource LargeButtonStyle}"
+            />
+        
+    </Grid>
+</ContentPage>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DubbeleKingen.Pages.PickANegativePage"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"  
+             xmlns:model="clr-namespace:DubbeleKingen.ViewModels"
+             x:DataType="model:PickANegativeModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Style="{StaticResource BaseContentPageStyle}"
+             >
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding UpdateTitleCommand}"/>
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="10*,5*,*,5*,*,5*,*,4*,*"
+          ColumnDefinitions="*,*"
+          Style="{StaticResource BaseGridStyle}">
+        <Label Grid.Row="0"
+               Grid.ColumnSpan="2"
+               Text="{Binding Title}"
+               Style="{StaticResource HeadLabelStyle}"
+ />
+        <Button Grid.Row="1"
+                Grid.Column="0"
+                Text="No Tricks"
+                Style="{StaticResource LargeButtonStyle}"
+                Command="{Binding GoToRunningGameCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>4</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                Text="No ♡"
+                Style="{StaticResource LargeButtonStyle}"
+                Command="{Binding GoToRunningGameCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>5</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+
+        <Button Grid.Row="3"
+                Grid.Column="0"
+                Text="No Q"
+                Style="{StaticResource LargeButtonStyle}"
+                Command="{Binding GoToRunningGameCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>6</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+        <Button Grid.Row="3"
+                Grid.Column="1"
+                Text="No K/J"
+                Style="{StaticResource LargeButtonStyle}"
+                Command="{Binding GoToRunningGameCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>7</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+
+        <Button Grid.Row="5"
+                Grid.Column="0"
+                Text="No K♡"
+                Style="{StaticResource LargeButtonStyle}"
+                Command="{Binding GoToRunningGameCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>8</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+
+        <Button Grid.Row="5"
+                Grid.Column="1"
+                Text="No 7/13"
+                Style="{StaticResource LargeButtonStyle}"
+                Command="{Binding GoToRunningGameCommand}">
+            <Button.CommandParameter>
+                <sys:Int32>9</sys:Int32>
+            </Button.CommandParameter>
+        </Button>
+
+        <Button Grid.Row="7"
+                Grid.ColumnSpan="2"
+                Text="Back"
+                Style="{StaticResource ReturnLargeButtonStyle}"
+                Command="{Binding GoBackCommand}" 
+                />
+    </Grid>
+</ContentPage>
